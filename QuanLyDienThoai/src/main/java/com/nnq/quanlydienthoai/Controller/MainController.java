@@ -1,23 +1,87 @@
 package com.nnq.quanlydienthoai.Controller;
 
 import com.nnq.quanlydienthoai.Model.Employee;
+import com.nnq.quanlydienthoai.Model.LoginBean;
 import com.nnq.quanlydienthoai.Services.EmpService;
+import com.nnq.quanlydienthoai.Services.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collection;
-
+import org.springframework.web.servlet.ModelAndView;
 @Controller
 
 public class MainController {
     @Autowired
     private EmpService empService;
+    @Autowired
+    private LoginService loginService;
 
-    Employee emp;
+    @RequestMapping(value="/Login",method=RequestMethod.POST)
+    public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("loginBean")LoginBean loginBean) throws IOException
+    {
+        ModelAndView model= null;
+        try
+        {
+            long isValidUser = loginService.isValidUser(request.getParameter("UserName"), request.getParameter("Password"));
+            if(isValidUser>0)
+            {
+                System.out.println("User Login Successful");
+                request.setAttribute("loggedInUser", request.getParameter("UserName"));
+
+                model = new ModelAndView("index");
+                response.sendRedirect("/ListEmployee");
+            }
+            else
+            {
+
+
+                model = new ModelAndView("Login");
+                model.addObject("loginBean", loginBean);
+                request.setAttribute("message", "Invalid credentials!!");
+            }
+
+        }
+        catch(Exception e)
+        {
+            System.out.println("SQLException occured: " + e.getMessage());
+            e.printStackTrace();
+            model = new ModelAndView("Login");
+            model.addObject("loginBean", loginBean);
+            request.setAttribute("message", "Invalid credentials!!");
+
+        }
+
+        return model;
+    }
+
+    @GetMapping("/Login")
+    public ModelAndView login(HttpServletRequest req)
+    {
+        ModelAndView model = new ModelAndView("Login");
+
+        LoginBean loginBean = new LoginBean();
+
+        model.addObject("loginBean", loginBean);
+
+        return model;
+
+    }
+    @GetMapping("/")
+    public ModelAndView welcome(HttpServletRequest req,HttpServletResponse response) throws IOException
+    {
+        ModelAndView model = new ModelAndView("Login");
+
+        LoginBean loginBean = new LoginBean();
+
+        model.addObject("loginBean", loginBean);
+
+        return model;
+
+    }
     @GetMapping("/ListEmployee")
     public String init(HttpServletRequest req)
     {

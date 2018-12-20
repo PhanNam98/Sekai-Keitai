@@ -18,7 +18,7 @@ public class MainController {
     private EmpService empService;
 
     Employee emp;
-    @GetMapping("/")
+    @GetMapping("/ListEmployee")
     public String init(HttpServletRequest req)
     {
         req.setAttribute("employeelist",empService.GetAllEmp());
@@ -30,6 +30,7 @@ public class MainController {
     {
         req.setAttribute("employe",empService.GetOneEmp(id));
         req.setAttribute("mode","Employee_Edit");
+        req.setAttribute("employeeType",empService.GetAllEmpType());
         return "index";
     }
     @GetMapping("/DeleteEmployee")
@@ -38,7 +39,7 @@ public class MainController {
         empService.DeleteEmp(id);
         req.setAttribute("employeelist", empService.GetAllEmp());
         req.setAttribute("mode", "Employee_view");
-        resp.sendRedirect("/");
+        resp.sendRedirect("/ListEmployee");
         return "index";
     }
 
@@ -59,7 +60,7 @@ public class MainController {
 
         req.setAttribute("employeelist", empService.GetAllEmp());
         req.setAttribute("mode", "Employee_view");
-        resp.sendRedirect("/");
+        resp.sendRedirect("/ListEmployee");
         return "index";
     }
     @RequestMapping(value = "/SaveNewEmp", method = RequestMethod.POST)
@@ -79,7 +80,7 @@ public class MainController {
 
         req.setAttribute("employeelist", empService.GetAllEmp());
         req.setAttribute("mode", "Employee_view");
-        resp.sendRedirect("/");
+        resp.sendRedirect("/ListEmployee");
         return "index";
     }
 

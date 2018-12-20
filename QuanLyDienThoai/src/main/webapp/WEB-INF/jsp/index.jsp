@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body  onload="check()" >
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -17,18 +17,20 @@
             <a class="navbar-brand" href="/">Sekai Keitai Shop</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/">Employee</a></li>
-            <li><a href="/CreateEmployee">New Employee</a></li>
+            <li class="active"><a href="/ListEmployee">Employee</a></li>
+            <%--<li><a href="/CreateEmployee">New Employee</a></li>--%>
 
         </ul>
     </div>
 </nav>
 
-<div class="container">
+<div class="container" >
     <c:choose>
         <c:when test="${mode == 'Employee_view'}">
             <h2>All Employees</h2>
-
+            <button type="button" onclick="location.href='/CreateEmployee'" class="btn btn-primary" >
+                <a href="/CreateEmployee"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>Create Employee
+            </button>
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -40,7 +42,7 @@
                     <th>Phone Number</th>
                     <th>Salary</th>
                     <th>Employee Type</th>
-                    <th> <a><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>EditEdit</th>
+                    <th> <a><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>EditEdit</th>
                     <th> <a><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Delete</th>
                 </tr>
                 </thead>
@@ -56,8 +58,8 @@
                         <td>${emp.salary}</td>
                         <td>${emp.empType}</td>
                         <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${emp.empID}" data-whatever="${emp.empID}">
-                            <a href="/EditEmployee?id=${emp.empID}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>Edit
+                        <button type="button" onclick="location.href='/EditEmployee?id=${emp.empID}'" class="btn btn-primary" >
+                            <a href="/EditEmployee?id=${emp.empID}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>Edit
                         </button>
                         </td>
                         <%--<td><a href="/DeleteEmployee?id=${emp.empID}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>--%>
@@ -95,7 +97,12 @@
             </table>
         </c:when>
         <c:when test="${mode == 'Employee_Edit'}">
-            <h2>Edit Employees</h2>
+
+            <center>
+                <h2>Edit Employees</h2>
+            </center>
+        <div class="row">
+            <div class="center-block col-md-6" style="float: none; background-color: cornsilk">
             <form action="/SaveEditEmp" method="post">
                 <div class="form-group">
                     <input type="hidden" class="form-control" value="${employe.empID}" id="EmployeeID"  name ="EmployeeID" >
@@ -112,9 +119,49 @@
                     <label>Address</label>
                     <input type="text" class="form-control" value="${employe.address}" id="EmployeeAddress" name ="EmployeeAddress" >
                 </div>
+
+
                 <div class="form-group">
                     <label>Sex</label>
-                    <input type="text" class="form-control" value="${employe.sex}" id="EmployeeSex" name ="EmployeeSex" >
+                <div>
+
+                    <input type="radio" id="EmployeeSexMale"  value="Male"  name="EmployeeSex" onclick="if(this.checked){getvalueSex1()}">Male
+                    <input type="radio" id="EmployeeSexFemale"  value="Female" name="EmployeeSex" onclick="if(this.checked){getvalueSex()}">Female
+                </div>
+
+
+
+                <script>
+                    function check() {
+                            if(document.getElementById("EmployeeSex").value.toLowerCase()==="male")
+                            {
+                                document.getElementById("EmployeeSexMale").checked = true;
+
+                            }
+                            else
+                                document.getElementById("EmployeeSexFemale").checked = true;
+                            document.readyState
+
+                    }
+
+                </script>
+                <script>
+                    function getvalueSex() {
+
+                        document.getElementById("EmployeeSex").value = "Female";
+
+                    }
+                    function getvalueSex1() {
+
+                        document.getElementById("EmployeeSex").value = "Male";
+
+                    }
+                </script>
+                </div>
+
+                <div class="form-group">
+
+                    <input type="hidden" class="form-control" value="${employe.sex}" id="EmployeeSex" name ="EmployeeSex" >
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
@@ -124,6 +171,23 @@
                     <label>Salary</label>
                     <input type="text" class="form-control" value="${employe.salary}" id="EmployeeSalary" name ="EmployeeSalary" >
                 </div>
+
+
+                <script>
+                    function SelEmpType() {
+                        var x = document.getElementById("SelectEmpType").value;
+
+                    }
+                    function GetEmpType() {
+                        var x=document.getElementById("EmployeeEmpType").value;
+
+                        document.getElementById("SelectEmpType").value = x;
+                        document.getElementById("demo").innerHTML = x;
+                        // document.getElementById("SelectEmpType").value = "banana";
+                    }
+                </script>
+
+
                 <div class="form-group">
                     <label>EmployeeType</label>
                     <input type="text" class="form-control" value="${employe.empType}" id="EmployeeEmpType" name ="EmployeeEmpType" >
@@ -131,9 +195,15 @@
 
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>
+            </div>
+        </div>
         </c:when>
         <c:when test="${mode == 'Employee_Create'}">
+        <center>
             <h2>Create Employees</h2>
+        </center>
+        <div class="row">
+            <div class="center-block col-md-6" style="float: none; background-color: cornsilk">
             <form action="/SaveNewEmp" method="post">
                 <div class="form-group">
                     <input type="hidden" class="form-control"  id="EmployeeID1"  name ="EmployeeID" >
@@ -151,9 +221,18 @@
                     <input type="text" class="form-control"  id="EmployeeAddress1" name ="EmployeeAddress" >
                 </div>
                 <div class="form-group">
-                    <label>Sex</label>
-                    <input type="text" class="form-control" id="EmployeeSex1" name ="EmployeeSex" >
+                    <label>Sex</label><br>
+                    <label class="radio-inline">
+                        <input type="radio" value="Male" name="EmployeeSex" checked>Male
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="FeMale" name="EmployeeSex">Female
+                    </label>
                 </div>
+                <%--<div class="form-group">--%>
+                    <%--<label>Sex</label>--%>
+                    <%--<input type="text" class="form-control" id="EmployeeSex1" name ="EmployeeSex" >--%>
+                <%--</div>--%>
                 <div class="form-group">
                     <label>Phone Number</label>
                     <input type="text" class="form-control"  id="EmployeeNumber1" name ="EmployeeNumber" >
@@ -169,6 +248,8 @@
 
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>
+            </div>
+        </div>
         </c:when>
     </c:choose>
 

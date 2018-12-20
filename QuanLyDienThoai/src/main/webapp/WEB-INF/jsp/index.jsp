@@ -190,7 +190,7 @@
 
                 <div class="form-group">
                     <label>EmployeeType</label>
-                    <input type="text" class="form-control" value="${employe.empType}" id="EmployeeEmpType" name ="EmployeeEmpType" >
+                    <input type="text" class="form-control" value="${employe.empType}" id="EmployeeEmpType" name ="EmployeeEmpType" readonly="readonly" >
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -243,8 +243,14 @@
                 </div>
                 <div class="form-group">
                     <label>EmployeeType</label>
-                    <input type="text" class="form-control"  id="EmployeeEmpType1" name ="EmployeeEmpType" >
+                    <%--<input type="text" class="form-control"  id="EmployeeEmpType1" name ="EmployeeEmpType" >--%>
+                    <select id="SelectEmpType" name="SelectEmpType" >
+                        <c:forEach var="emptype" items="${employeeType}">
+                            <option value="${emptype.empType}">${emptype.empTypeName}</option>
+                        </c:forEach>
+                    </select>
                 </div>
+
 
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>

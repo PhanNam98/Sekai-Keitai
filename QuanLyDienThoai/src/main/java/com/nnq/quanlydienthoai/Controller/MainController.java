@@ -135,11 +135,12 @@ public class MainController {
         e.setEmpName(req.getParameter("EmployeeName"));
         //e.setEmpID( Integer.parseInt(req.getParameter("EmployeeID")));
         e.setAddress(req.getParameter("EmployeeAddress"));
-        e.setEmpType(req.getParameter("EmployeeEmpType"));
+//        e.setEmpType(req.getParameter("EmployeeEmpType"));
         e.setSocIdentity(req.getParameter("EmployeeSocIdentity"));
         e.setPhoneNum(req.getParameter("EmployeeNumber"));
         e.setSalary(Float.parseFloat(req.getParameter("EmployeeSalary")));
         e.setSex(req.getParameter("EmployeeSex"));
+        e.setEmpType(req.getParameter("SelectEmpType"));
         empService.SaveEditEmp(e);
 
         req.setAttribute("employeelist", empService.GetAllEmp());
@@ -162,6 +163,7 @@ public class MainController {
     public String CrateEmployee(HttpServletRequest req)
     {
         req.setAttribute("mode","Employee_Create");
+        req.setAttribute("employeeType",empService.GetAllEmpType());
         return "index";
 
     }

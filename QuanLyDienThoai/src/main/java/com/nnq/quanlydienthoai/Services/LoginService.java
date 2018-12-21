@@ -18,10 +18,11 @@ public class LoginService {
     private LoginRepository loginRepository;
     public long isValidUser(String username,String password)
     {
-        LoginBean a= loginRepository.findById(username).get();
-        if(a!=null && a.getPassword().equals(password)&& a.getAccounttype().equals("Admin"))
-            return 1;
-        return 0;
+//        LoginBean a= loginRepository.findById(username).get();
+//        if(a!=null && a.getPassword().equals(password)&& a.getAccounttype().equals("Admin"))
+//            return 1;
+//        return 0;
+        return loginRepository.findAll().stream().filter(p->p.getUsername().equals(username) && p.getPassword().equals(password)).count();
 
     }
 

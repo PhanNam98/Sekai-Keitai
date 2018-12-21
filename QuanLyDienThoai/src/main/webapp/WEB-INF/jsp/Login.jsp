@@ -30,11 +30,11 @@ n.js"></script>
         <div class="center-block col-md-6" style="float: none; background-color: cornsilk">
     <div class="form-group">
         <label>UserName</label>
-        <input type="text" class="form-control" id="UserName" name ="UserName" >
+        <input type="text" class="form-control" id="UserName" name ="UserName"  >
     </div>
     <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control" id="Password" name ="Password" >
+        <input type="password" class="form-control" id="Password" name ="Password"  >
     </div>
 
     <button type="submit" class="btn btn-primary">Login</button>

@@ -2,8 +2,10 @@ package com.nnq.quanlydienthoai.Controller;
 
 import com.nnq.quanlydienthoai.Model.Employee;
 import com.nnq.quanlydienthoai.Model.LoginBean;
+import com.nnq.quanlydienthoai.Model.Developer;
 import com.nnq.quanlydienthoai.Services.EmpService;
 import com.nnq.quanlydienthoai.Services.LoginService;
+import com.nnq.quanlydienthoai.Services.DeveloperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ public class MainController {
     private EmpService empService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private DeveloperService developerService;
+
 
     @RequestMapping(value="/Login",method=RequestMethod.POST)
     public ModelAndView executeLogin(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("loginBean")LoginBean loginBean) throws IOException
@@ -26,6 +31,7 @@ public class MainController {
         ModelAndView model= null;
         try
         {
+//            long isValidUser = loginService.isValidUser(loginBean.getUsername(), loginBean.getPassword());
             long isValidUser = loginService.isValidUser(request.getParameter("UserName"), request.getParameter("Password"));
             if(isValidUser>0)
             {
@@ -167,4 +173,66 @@ public class MainController {
         return "index";
 
     }
+//Developer
+    @GetMapping("/ListDeveloper")
+    public String listDev(HttpServletRequest req)
+    {
+        req.setAttribute("devlist",developerService.GetAllDevloper());
+        req.setAttribute("mode","Dev_view");
+        return "Dev";
+    }
+    @GetMapping("/EditDeveloper")
+    public String EditDev(HttpServletRequest req,@RequestParam String id)
+    {
+        req.setAttribute("dev",developerService.GetOneDev(id));
+        req.setAttribute("mode","Dev_Edit");
+        return "Dev";
+    }
+    @GetMapping("/DeleteDeveloper")
+    public String DeleteDev(HttpServletRequest req,@RequestParam String id, HttpServletResponse resp) throws IOException
+    {
+        developerService.DeleteDev(id);
+        req.setAttribute("devlist", developerService.GetAllDevloper());
+        req.setAttribute("mode", "Dev_view");
+        resp.sendRedirect("/ListDeveloper");
+        return "Dev";
+    }
+    @RequestMapping(value = "/SaveEditDev", method = RequestMethod.POST)
+
+    public String SaveEditDev(@ModelAttribute(value = "dev") Developer dev, HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+        dev.setDevid(req.getParameter("DevID"));
+        dev.setDevname( req.getParameter("DevName"));
+
+        developerService.SaveEditDev(dev);
+
+        req.setAttribute("devlist", developerService.GetAllDevloper());
+        req.setAttribute("mode", "Dev_view");
+        resp.sendRedirect("/ListDeveloper");
+        return "Dev";
+    }
+    @RequestMapping(value = "/SaveNewDev", method = RequestMethod.POST)
+
+    public String SaveNewDev( HttpServletRequest req, HttpServletResponse resp) throws IOException
+    {
+        Developer d = new Developer();
+        d.setDevid(req.getParameter("DevID"));
+        d.setDevname(req.getParameter("DevName"));
+//
+
+        developerService.SaveEditDev(d);
+
+        req.setAttribute("devlist", developerService.GetAllDevloper());
+        req.setAttribute("mode", "Dev_view");
+        resp.sendRedirect("/ListDeveloper");
+        return "Dev";
+    }
+    @GetMapping("/CreateDeveloper")
+    public String CreateDeveloper(HttpServletRequest req)
+    {
+        req.setAttribute("mode","Dev_Create");
+        return "Dev";
+
+    }
+
 }

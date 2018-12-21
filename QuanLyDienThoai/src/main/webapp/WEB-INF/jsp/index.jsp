@@ -19,7 +19,12 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="/ListEmployee">Employee</a></li>
             <%--<li><a href="/CreateEmployee">New Employee</a></li>--%>
-
+            <li ><a href="/ListDeveloper">Developer</a></li>
+            <li><a href="/ListGeneration">Generation</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+            <%--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
         </ul>
     </div>
 </nav>
@@ -136,7 +141,6 @@
                             if(document.getElementById("EmployeeSex").value.toLowerCase()==="male")
                             {
                                 document.getElementById("EmployeeSexMale").checked = true;
-
                             }
                             else
                                 document.getElementById("EmployeeSexFemale").checked = true;

@@ -5,7 +5,7 @@ import com.nnq.quanlydienthoai.Model.ProductDetail;
 import com.nnq.quanlydienthoai.Services.DeveloperService;
 import com.nnq.quanlydienthoai.Services.GenerationService;
 import com.nnq.quanlydienthoai.Services.ProductService;
-
+import com.nnq.quanlydienthoai.Services.ColorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +23,22 @@ public class ProductController {
     private DeveloperService developerService;
     @Autowired
     private GenerationService generationService;
+    @Autowired
+    private ColorService colorService;
 
 
     @GetMapping("/ListProduct")
     public String listProduct(HttpServletRequest req)
     {
         req.setAttribute("prodlist",productService.GetAllProduct());
+        req.setAttribute("mode","Prod_view");
+        return "Product";
+    }
+
+    @RequestMapping(value = "/SeachProduct", method = RequestMethod.POST)
+    public String SeachProduct(HttpServletRequest req)
+    {
+        req.setAttribute("prodlist",productService.SearchProduct(req.getParameter("searchprod")));
         req.setAttribute("mode","Prod_view");
         return "Product";
     }
@@ -120,20 +130,31 @@ public String listProductDetail(HttpServletRequest req)
     req.setAttribute("mode","ProdDetail_view");
     return "ProductDetail";
 }
+    @GetMapping("/ListProductDetailBy")
+    public String ListProductDetailBy(HttpServletRequest req,@RequestParam String id)
+    {
+        req.setAttribute("proddetaillist",productService.GetAllProductDetailByProductID(id));
+        req.setAttribute("mode","ProdDetail_view");
+        req.setAttribute("ProdDetailID",id);
+        return "ProductDetail";
+    }
     @GetMapping("/EditProductDetail")
     public String EditProcductDetail(HttpServletRequest req,@RequestParam String id)
     {
+
         req.setAttribute("prodDetail",productService.GetOneProductDetail(id));
         req.setAttribute("mode","ProdDetail_Edit");
+        req.setAttribute("listcolor",colorService.GetAllColor());
+        req.setAttribute("colorselect",productService.GetOneProductDetail(id).getColorid());
         return "ProductDetail";
     }
     @GetMapping("/DeleteProductDetail")
-    public String DeleteProductDetail(HttpServletRequest req,@RequestParam String id, HttpServletResponse resp) throws IOException
+    public String DeleteProductDetail(HttpServletRequest req,@RequestParam String id,@RequestParam String idproduct, HttpServletResponse resp) throws IOException
     {
         productService.DeleteProductDetail(id);
-        req.setAttribute("proddetaillist",productService.GetAllProduct());
+        req.setAttribute("proddetaillist",productService.GetAllProductDetailByProductID(idproduct));
         req.setAttribute("mode","ProdDetail_view");
-        resp.sendRedirect("/ListProductDetail");
+        resp.sendRedirect("/ListProductDetailBy?id="+idproduct);
         return "ProductDetail";
     }
     @RequestMapping(value = "/SaveEditProductDetail", method = RequestMethod.POST)
@@ -142,7 +163,7 @@ public String listProductDetail(HttpServletRequest req)
     {
         prodDetail.setProductid(req.getParameter("ProdID"));
         prodDetail.setModelid( req.getParameter("ModelID"));
-        prodDetail.setColorid( req.getParameter("ColorID"));
+        prodDetail.setColorid( req.getParameter("SelectColor"));
         prodDetail.setPrice(Float.parseFloat( req.getParameter("Price")));
         prodDetail.setQuantity(Integer.parseInt(req.getParameter("Quantity")));
 
@@ -150,18 +171,22 @@ public String listProductDetail(HttpServletRequest req)
         productService.SaveEditProductDetail(prodDetail);
 
         req.setAttribute("proddetaillist", productService.GetAllProductDetail());
+        req.setAttribute("ProdDetailID",req.getParameter("ProdID"));
         req.setAttribute("mode","ProdDetail_view");
-        resp.sendRedirect("/ListProductDetail");
+
+        resp.sendRedirect("ListProductDetailBy?id="+req.getParameter("ProdID"));
+
         return "ProductDetail";
     }
     @RequestMapping(value = "/SaveNewProductDetail", method = RequestMethod.POST)
 
     public String SaveNewProductDetail( HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
+
         ProductDetail p = new ProductDetail();
         p.setProductid(req.getParameter("ProdID"));
         p.setModelid( req.getParameter("ModelID"));
-        p.setColorid( req.getParameter("ColorID"));
+        p.setColorid( req.getParameter("SelectColor"));
         p.setPrice(Float.parseFloat( req.getParameter("Price")));
         p.setQuantity(Integer.parseInt(req.getParameter("Quantity")));
 
@@ -170,14 +195,18 @@ public String listProductDetail(HttpServletRequest req)
 
         req.setAttribute("proddetaillist", productService.GetAllProductDetail());
         req.setAttribute("mode","ProdDetail_view");
-        resp.sendRedirect("/ListProductDetail");
+        resp.sendRedirect("ListProductDetailBy?id="+req.getParameter("ProdID"));
+        req.setAttribute("ProdDetailID",req.getParameter("ProdID"));
         return "ProductDetail";
     }
 
     @GetMapping("/CreateProductDetail")
-    public String CreateProductDetail(HttpServletRequest req)
+    public String CreateProductDetail(HttpServletRequest req,@RequestParam String id)
     {
+
         req.setAttribute("mode","ProductDetail_Create");
+        req.setAttribute("ProdDetailID",id);
+        req.setAttribute("listcolor",colorService.GetAllColor());
         return "ProductDetail";
 
     }

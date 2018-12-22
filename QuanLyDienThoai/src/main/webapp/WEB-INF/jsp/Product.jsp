@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Sekai Keitai Shop</a>
+            <a class="navbar-brand" href="/Dashboard">Sekai Keitai Shop</a>
         </div>
         <ul class="nav navbar-nav">
             <li ><a href="/ListEmployee">Employee</a></li>
@@ -24,7 +24,7 @@
             <li class="active"><a href="/ListProduct">Product</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+            <li><a href="/Login"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
             <%--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
         </ul>
     </div>
@@ -33,11 +33,24 @@
 <div class="container" >
     <c:choose>
         <c:when test="${mode == 'Prod_view'}">
+        <div class="row">
+            <div class="center-block col-md-6">
             <h2>All Product</h2>
+                <form  action="/SeachProduct" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="searchprod">
+            </div>
+                    <%--<div class="form-group">--%>
+            <%--<button type="submit" class="btn btn-default">Search</button>    </div>--%>
+        </form>
+            </div>
+        </div>
             <button type="button" onclick="location.href='/CreateProduct'" class="btn btn-primary" >
                 <a href="/CreateProduct"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>Create Product
             </button>
+
             <table class="table table-hover">
+
                 <thead>
                 <tr>
                     <th>Product ID</th>
@@ -50,6 +63,7 @@
                     <th>Generation</th>
                     <th> <a><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>Edit</th>
                     <th> <a><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Delete</th>
+                    <th> <a><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Product Detail</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,7 +80,7 @@
 
                         <td>
                             <button type="button" onclick="location.href='/EditProduct?id=${prod.productid}'" class="btn btn-primary" >
-                                <a href="/EditDeveloper?id=${prod.productid}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>Edit
+                                <a href="/EditProduct?id=${prod.productid}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>Edit
                             </button>
                         </td>
                             <%--<td><a href="/DeleteEmployee?id=${emp.empID}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>--%>
@@ -80,7 +94,7 @@
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Delete Developer</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -97,6 +111,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                            <button type="button" onclick="location.href='/ListProductDetailBy?id=${prod.productid}'" class="btn btn-primary" >
+                                <a href="/ListProductDetailBy?id=${prod.productid}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>List Product
+                            </button>
                         </td>
                     </tr>
                 </c:forEach>

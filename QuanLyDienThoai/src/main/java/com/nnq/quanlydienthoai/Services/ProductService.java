@@ -3,6 +3,8 @@ package com.nnq.quanlydienthoai.Services;
 import java.util.ArrayList;
 import  java.util.List;
 import  java.util.Collection;
+
+import com.nnq.quanlydienthoai.DAO.ProductJpaRepository;
 import com.nnq.quanlydienthoai.DAO.ProductRepository;
 import com.nnq.quanlydienthoai.DAO.ProductDetailRepository;
 import com.nnq.quanlydienthoai.DAO.ProductDetailJpaRepository;
@@ -25,7 +27,8 @@ public class ProductService {
     private ProductDetailRepository productDetailRepository;
     @Autowired
     private ProductDetailJpaRepository productDetailJpaRepository;
-
+    @Autowired
+    private ProductJpaRepository productJpaRepository;
     public Collection<Product> GetAllProduct()
     {
         List<Product> prods= new ArrayList<Product>();
@@ -34,6 +37,10 @@ public class ProductService {
             prods.add(e);
         }
         return prods;
+    }
+    public Collection<Product> SearchProduct(String id)
+    {
+        return productJpaRepository.findAll().stream().filter(p->p.getProductname().contains(id)|| p.getProductid().contains(id)||p.getGenid().contains(id)).collect(Collectors.toList());
     }
 
     public Product GetOneProduct(String id)
@@ -61,6 +68,7 @@ public class ProductService {
         }
         return prods;
     }
+
     public Collection<ProductDetail> GetAllProductDetailByProductID(String id)
     {
       return productDetailJpaRepository.findAll().stream().filter(p->p.getProductid().equals(id)).collect(Collectors.toList());

@@ -79,14 +79,21 @@ public class MainController {
     @GetMapping("/")
     public ModelAndView welcome(HttpServletRequest req,HttpServletResponse response) throws IOException
     {
-        ModelAndView model = new ModelAndView("Login");
-
-        LoginBean loginBean = new LoginBean();
-
-        model.addObject("loginBean", loginBean);
-
+//        ModelAndView model = new ModelAndView("Login");
+//
+//        LoginBean loginBean = new LoginBean();
+//
+//        model.addObject("loginBean", loginBean);
+//
+//        return model;
+        ModelAndView model = new ModelAndView("Welcome");
         return model;
-
+    }
+    @GetMapping("/Dashboard")
+    public ModelAndView Dashboard(HttpServletRequest req,HttpServletResponse response) throws IOException
+    {
+        ModelAndView model = new ModelAndView("Dashboard");
+        return model;
     }
     @GetMapping("/ListEmployee")
     public String init(HttpServletRequest req)
@@ -148,6 +155,15 @@ public class MainController {
         e.setSex(req.getParameter("EmployeeSex"));
         e.setEmpType(req.getParameter("SelectEmpType"));
         empService.SaveEditEmp(e);
+        if(req.getParameter("Username")!=null &&req.getParameter("Username")!="" ) {
+            LoginBean a = new LoginBean();
+            a.setUsername(req.getParameter("Username"));
+            a.setPassword(req.getParameter("password1"));
+            a.setAccounttype(req.getParameter("SelectAccType"));
+
+            loginService.SaveAccount(a);
+        }
+
 
         req.setAttribute("employeelist", empService.GetAllEmp());
         req.setAttribute("mode", "Employee_view");
@@ -170,6 +186,7 @@ public class MainController {
     {
         req.setAttribute("mode","Employee_Create");
         req.setAttribute("employeeType",empService.GetAllEmpType());
+        req.setAttribute("accountType",loginService.GetAllAccountType());
         return "index";
 
     }

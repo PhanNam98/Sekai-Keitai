@@ -14,7 +14,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/">Sekai Keitai Shop</a>
+            <a class="navbar-brand" href="/Dashboard">Sekai Keitai Shop</a>
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/ListEmployee">Employee</a></li>
@@ -24,7 +24,7 @@
             <li><a href="/ListProduct">Product</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+            <li><a href="/Login"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
             <%--<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>--%>
         </ul>
     </div>
@@ -255,6 +255,47 @@
                         </c:forEach>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control"  id="User1" name ="Username" >
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                        <input type="password" class="input-md form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 4 Characters Long<br>
+
+                            </div>
+
+                        </div>
+
+                    </div><!--/row-->
+
+                    <div class="form-group">
+                        <label>RePassword</label>
+
+                            <input type="password" class="input-md form-control" name="password2" id="password2" placeholder="Confirm Password" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
+                                </div>
+                            </div>
+
+
+
+                        </div><!--/row-->
+
+
+                        <div class="form-group">
+                    <label>Account Type</label>
+                        <%--<input type="text" class="form-control"  id="EmployeeEmpType1" name ="EmployeeEmpType" >--%>
+                    <select id="SelectAccType" name="SelectAccType" >
+                        <c:forEach var="acctype" items="${accountType}">
+                            <option value="${acctype.accType}">${acctype.accTypeName}</option>
+                        </c:forEach>
+                    </select>
+                </div>
 
 
                 <button type="submit" class="btn btn-primary">Save</button>
@@ -265,6 +306,68 @@
     </c:choose>
 
 </div>
+
+
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+
+<script>
+    $("input[type=password]").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#password1").val().length >= 4){
+            $("#8char").removeClass("glyphicon-remove");
+            $("#8char").addClass("glyphicon-ok");
+            $("#8char").css("color","#00A41E");
+        }else{
+            $("#8char").removeClass("glyphicon-ok");
+            $("#8char").addClass("glyphicon-remove");
+            $("#8char").css("color","#FF0004");
+        }
+
+        //if(ucase.test($("#password1").val())){
+        //	$("#ucase").removeClass("glyphicon-remove");
+        //	$("#ucase").addClass("glyphicon-ok");
+        //	$("#ucase").css("color","#00A41E");
+        //}else{
+        //	$("#ucase").removeClass("glyphicon-ok");
+        //	$("#ucase").addClass("glyphicon-remove");
+        //	$("#ucase").css("color","#FF0004");
+        //}
+
+        //if(lcase.test($("#password1").val())){
+        //	$("#lcase").removeClass("glyphicon-remove");
+        //	$("#lcase").addClass("glyphicon-ok");
+        //	$("#lcase").css("color","#00A41E");
+        //}else{
+        //	$("#lcase").removeClass("glyphicon-ok");
+        //	$("#lcase").addClass("glyphicon-remove");
+        //	$("#lcase").css("color","#FF0004");
+        //}
+
+        //if(num.test($("#password1").val())){
+        //	$("#num").removeClass("glyphicon-remove");
+        //	$("#num").addClass("glyphicon-ok");
+        //	$("#num").css("color","#00A41E");
+        //}else{
+        //	$("#num").removeClass("glyphicon-ok");
+        //	$("#num").addClass("glyphicon-remove");
+        //	$("#num").css("color","#FF0004");
+        //}
+
+        if ($("#password1").val() == $("#password2").val()) {
+            $("#pwmatch").removeClass("glyphicon-remove");
+            $("#pwmatch").addClass("glyphicon-ok");
+            $("#pwmatch").css("color", "#00A41E");
+        } else {
+            $("#pwmatch").removeClass("glyphicon-ok");
+            $("#pwmatch").addClass("glyphicon-remove");
+            $("#pwmatch").css("color", "#FF0004");
+        }
+    });</script>
 
 </body>
 </html>

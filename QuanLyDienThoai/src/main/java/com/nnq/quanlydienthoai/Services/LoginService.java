@@ -3,8 +3,10 @@ import java.util.ArrayList;
 import  java.util.List;
 import  java.util.Collection;
 import com.nnq.quanlydienthoai.DAO.LoginRepository;
+import com.nnq.quanlydienthoai.DAO.AccountTypeRepository;
 
 import com.nnq.quanlydienthoai.Model.LoginBean;
+import com.nnq.quanlydienthoai.Model.AccountType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.swing.*;
@@ -16,6 +18,26 @@ import java.util.Collection;
 public class LoginService {
     @Autowired
     private LoginRepository loginRepository;
+    @Autowired
+    private  AccountTypeRepository accountTypeRepository;
+
+    public Collection<AccountType> GetAllAccountType()
+    {
+        List<AccountType> at= new ArrayList<AccountType>();
+        for(AccountType e: accountTypeRepository.findAll())
+        {
+            if (e.getAccType().equals("Admin"))
+            {}
+            else
+            at.add(e);
+        }
+        return at;
+    }
+    public void SaveAccount(LoginBean c)
+    {
+        loginRepository.save(c);
+
+    }
     public long isValidUser(String username,String password)
     {
 //        LoginBean a= loginRepository.findById(username).get();

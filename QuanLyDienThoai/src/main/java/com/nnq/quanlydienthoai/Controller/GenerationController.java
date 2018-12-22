@@ -65,7 +65,7 @@ public class GenerationController {
     }
     @RequestMapping(value = "/SaveNewGen", method = RequestMethod.POST)
 
-    public String SaveNewDev( HttpServletRequest req, HttpServletResponse resp) throws IOException
+    public String SaveNewGen( HttpServletRequest req, HttpServletResponse resp) throws IOException
     {
         Generation g = new Generation();
         g.setGenid(req.getParameter("GenID"));
@@ -80,7 +80,7 @@ public class GenerationController {
         return "Generation";
     }
     @GetMapping("/CreateGeneration")
-    public String CreateDeveloper(HttpServletRequest req)
+    public String CreateGeneration(HttpServletRequest req)
     {
         req.setAttribute("mode","Gen_Create");
         req.setAttribute("devlist",developerService.GetAllDevloper());

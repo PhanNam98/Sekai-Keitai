@@ -218,7 +218,6 @@ public class MainController {
         Developer d = new Developer();
         d.setDevid(req.getParameter("DevID"));
         d.setDevname(req.getParameter("DevName"));
-//
 
         developerService.SaveEditDev(d);
 

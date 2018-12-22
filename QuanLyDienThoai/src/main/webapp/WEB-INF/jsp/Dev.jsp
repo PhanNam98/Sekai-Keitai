@@ -21,6 +21,7 @@
             <%--<li><a href="/CreateEmployee">New Employee</a></li>--%>
             <li class="active"><a href="/ListDeveloper">Developer</a></li>
             <li><a href="/ListGeneration">Generation</a></li>
+            <li><a href="/ListProduct">Product</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/"><span class="glyphicon glyphicon-user"></span> Logout</a></li>

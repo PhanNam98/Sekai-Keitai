@@ -33,6 +33,12 @@
 
 <div class="container" >
 
+    <center>
+        <p>Hello </p>
+
+        <h1>Welcome to Sekai Keitai Shop</h1>
+        <h2>Page Admin</h2>
+        <%--<a type="button" class="btn btn-primary" href="/Login" >Login</a>--%>
 
 </div>
 

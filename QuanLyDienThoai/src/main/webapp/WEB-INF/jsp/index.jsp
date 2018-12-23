@@ -8,6 +8,32 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+    <script type="text/javascript">
+        function showacc(s1) {
+            var select=document.getElementById("SelectEmpType");
+            if(select.value=="Emp")
+            {
+                document.getElementById("User1").disabled=true;
+                document.getElementById("password1").disabled=true;
+                document.getElementById("password2").disabled=true;
+                document.getElementById("SelectAccType").disabled=true;
+
+            }
+            else
+            {
+                document.getElementById("User1").disabled=false;
+                document.getElementById("password1").disabled=false;
+                document.getElementById("password2").disabled=false;
+                document.getElementById("SelectAccType").disabled=false;
+                // document.getElementById("usernameacc").style.visibility='visible';
+            }
+
+
+        };
+    </script>
 </head>
 <body  onload="check(),a(),s(),soc(),n()" >
 
@@ -71,32 +97,32 @@
                         </td>
                         <%--<td><a href="/DeleteEmployee?id=${emp.empID}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>--%>
                         <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${emp.empID}" data-whatever="${emp.empID}">
-                                <a href="/DeleteEmployee?id=${emp.empID}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Delete
-                        </button>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${emp.empID}" data-whatever="${emp.empID}">
+                                <a href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Delete
+                            </button>
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="${emp.empID}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Employee</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <%--<a type="button" class="btn btn-primary" href="/DeleteEmployee?id=${emp.empID}" target="_blank">Agree</a>--%>
+                            <!-- Modal -->
+                            <div class="modal fade" id="${emp.empID}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete Employee</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure?
+                                        </div>
+                                        <div class="modal-footer">
+                                                <%--<a type="button" class="btn btn-primary" href="/DeleteEmployee?id=${emp.empID}" target="_blank">Agree</a>--%>
                                             <a type="button" class="btn btn-primary" href="/DeleteEmployee?id=${emp.empID}" >Agree</a>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                         </td>
                     </tr>
                 </c:forEach>
@@ -130,7 +156,7 @@
                     <input type="text" class="form-control" value="${employe.socIdentity}" id="EmployeeSocIdentity" name ="EmployeeSocIdentity" >
                     <div class="row">
                         <div class="col-sm-6">
-                            <span id="soc1" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 10 Characters Long<br>
+                            <span id="soc1" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 9 Characters Long<br>
 
                         </div>
                     </div>
@@ -257,7 +283,7 @@
                     <input type="text" class="form-control" id="EmployeeSocIdentity1" name ="EmployeeSocIdentity"  placeholder="SocIdentity">
                     <div class="row">
                         <div class="col-sm-6">
-                            <span id="soc" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 10 Characters Long<br>
+                            <span id="soc" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 9 Characters Long<br>
 
                         </div>
                     </div>
@@ -303,19 +329,19 @@
                 <div class="form-group">
                     <label>EmployeeType</label>
                     <%--<input type="text" class="form-control"  id="EmployeeEmpType1" name ="EmployeeEmpType" >--%>
-                    <select id="SelectEmpType" name="SelectEmpType" >
+                    <select id="SelectEmpType" name="SelectEmpType" onchange="showacc('SelectEmpType')">
                         <c:forEach var="emptype" items="${employeeType}">
                             <option value="${emptype.empType}">${emptype.empTypeName}</option>
                         </c:forEach>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group"  >
                     <label>Username</label>
-                    <input type="text" class="form-control"  id="User1" name ="Username" placeholder="User Name" >
+                    <input type="text" class="form-control"  id="User1" name ="Username" placeholder="User Name" disabled>
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                        <input type="password" class="input-md form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off">
+                        <input type="password" class="input-md form-control" name="password1" id="password1" placeholder="New Password" autocomplete="off" disabled>
                         <div class="row">
                             <div class="col-sm-6">
                                 <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 4 Characters Long<br>
@@ -327,7 +353,7 @@
                     <div class="form-group">
                         <label>RePassword</label>
 
-                            <input type="password" class="input-md form-control" name="password2" id="password2" placeholder="Confirm Password" autocomplete="off">
+                            <input type="password" class="input-md form-control" name="password2" id="password2" placeholder="Confirm Password" autocomplete="off" disabled>
                             <div class="row">
                                 <div class="col-md-10">
                                     <span id="pwmatch" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Passwords Match
@@ -342,7 +368,7 @@
                         <div class="form-group">
                     <label>Account Type</label>
                         <%--<input type="text" class="form-control"  id="EmployeeEmpType1" name ="EmployeeEmpType" >--%>
-                    <select id="SelectAccType" name="SelectAccType" >
+                    <select id="SelectAccType" name="SelectAccType" disabled="disabled">
                         <c:forEach var="acctype" items="${accountType}">
                             <option value="${acctype.accType}">${acctype.accTypeName}</option>
                         </c:forEach>
@@ -361,7 +387,7 @@
 </div>
 
 
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<%--<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>--%>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
@@ -525,7 +551,7 @@ function s() {
         var lcase = new RegExp("[a-z]+");
         var num = new RegExp("[0-9]+");
 
-        if($("#EmployeeSocIdentity1").val().length >= 10){
+        if($("#EmployeeSocIdentity1").val().length >= 9){
             $("#soc").removeClass("glyphicon-remove");
             $("#soc").addClass("glyphicon-ok");
             $("#soc").css("color","#00A41E");
@@ -547,7 +573,7 @@ function s() {
         var lcase = new RegExp("[a-z]+");
         var num = new RegExp("[0-9]+");
 
-        if($("#EmployeeSocIdentity").val().length >= 10){
+        if($("#EmployeeSocIdentity").val().length >= 9){
             $("#soc1").removeClass("glyphicon-remove");
             $("#soc1").addClass("glyphicon-ok");
             $("#soc1").css("color","#00A41E");
@@ -569,7 +595,7 @@ function s() {
         var lcase = new RegExp("[a-z]+");
         var num = new RegExp("[0-9]+");
 
-        if($("#EmployeeSocIdentity").val().length >= 10){
+        if($("#EmployeeSocIdentity").val().length >= 9){
             $("#soc1").removeClass("glyphicon-remove");
             $("#soc1").addClass("glyphicon-ok");
             $("#soc1").css("color","#00A41E");
@@ -658,7 +684,7 @@ function s() {
                 alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
                 return false;
             }
-            if($("#EmployeeSocIdentity1").val().length < 10) {
+            if($("#EmployeeSocIdentity1").val().length < 9) {
                 alert("Not longer than 10")
                 return false;
             }
@@ -690,7 +716,7 @@ function s() {
                 alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
                 return false;
             }
-            if($("#EmployeeSocIdentity").val().length < 10) {
+            if($("#EmployeeSocIdentity").val().length < 9) {
                 alert("Not longer than 10")
                 return false;
             }
@@ -710,5 +736,6 @@ function s() {
         });
     });
 </script>
+
 </body>
 </html>

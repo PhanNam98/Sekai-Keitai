@@ -70,7 +70,7 @@
                             <%--<td><a href="/DeleteEmployee?id=${emp.empID}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>--%>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${prod.modelid}" data-whatever="${prod.modelid}">
-                                <a href="/DeleteProductDetail?id=${prod.modelid}&&idproduct=${prod.productid}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Delete
+                                <a href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Delete
                             </button>
 
                             <!-- Modal -->

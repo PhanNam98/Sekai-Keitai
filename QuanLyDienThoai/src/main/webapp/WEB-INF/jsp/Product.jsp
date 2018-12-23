@@ -64,7 +64,7 @@
                     <th>Generation</th>
                     <th> <a><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>Edit</th>
                     <th> <a><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Delete</th>
-                    <th> <a><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>Product Detail</th>
+                    <th> <a><span class="glyphicon glyphicon-list" aria-hidden="true"></span></a>Product Detail</th>
                 </tr>
                 </thead>
                 <tbody>

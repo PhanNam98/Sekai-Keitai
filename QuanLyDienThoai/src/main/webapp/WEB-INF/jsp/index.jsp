@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
-<body  onload="check()" >
+<body  onload="check(),a(),s(),soc(),n()" >
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -116,10 +116,23 @@
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" value="${employe.empName}" id="EmployeeName" name ="EmployeeName" >
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="name1" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Not Empty<br>
+
+                        </div>
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>SocIdentity</label>
                     <input type="text" class="form-control" value="${employe.socIdentity}" id="EmployeeSocIdentity" name ="EmployeeSocIdentity" >
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="soc1" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 10 Characters Long<br>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Address</label>
@@ -171,10 +184,23 @@
                 <div class="form-group">
                     <label>Phone Number</label>
                     <input type="text" class="form-control" value="${employe.phoneNum}" id="EmployeeNumber" name ="EmployeeNumber" >
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="num1" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 10 Characters Long<br>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Salary</label>
                     <input type="text" class="form-control" value="${employe.salary}" id="EmployeeSalary" name ="EmployeeSalary" >
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="sa1" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 2 Characters Long<br>
+
+                        </div>
+
+                    </div>
                 </div>
 
 
@@ -198,7 +224,7 @@
                     <input type="text" class="form-control" value="${employe.empType}" id="EmployeeEmpType" name ="EmployeeEmpType" readonly="readonly" >
                 </div>
 
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary" id="btnSubmitEdit">Save</button>
             </form>
             </div>
         </div>
@@ -215,15 +241,28 @@
                 </div>
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" class="form-control" id="EmployeeName1" name ="EmployeeName" >
+                    <input type="text" class="form-control" id="EmployeeName1" name ="EmployeeName" placeholder="Name">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="name" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> Not Empty<br>
+
+                        </div>
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>SocIdentity</label>
-                    <input type="text" class="form-control" id="EmployeeSocIdentity1" name ="EmployeeSocIdentity" >
+                    <input type="text" class="form-control" id="EmployeeSocIdentity1" name ="EmployeeSocIdentity"  placeholder="SocIdentity">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="soc" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 10 Characters Long<br>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Address</label>
-                    <input type="text" class="form-control"  id="EmployeeAddress1" name ="EmployeeAddress" >
+                    <input type="text" class="form-control"  id="EmployeeAddress1" name ="EmployeeAddress" placeholder="Address">
                 </div>
                 <div class="form-group">
                     <label>Sex</label><br>
@@ -240,11 +279,24 @@
                 <%--</div>--%>
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input type="text" class="form-control"  id="EmployeeNumber1" name ="EmployeeNumber" >
+                    <input type="text" class="form-control"  id="EmployeeNumber1" name ="EmployeeNumber" placeholder="Phone Number">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="num" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 10 Characters Long<br>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Salary</label>
-                    <input type="text" class="form-control"  id="EmployeeSalary1" name ="EmployeeSalary" >
+                    <input type="text" class="form-control"  id="EmployeeSalary1" name ="EmployeeSalary" placeholder="Salary">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <span id="sa" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 2 Characters Long<br>
+
+                        </div>
+
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>EmployeeType</label>
@@ -257,7 +309,7 @@
                 </div>
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control"  id="User1" name ="Username" >
+                    <input type="text" class="form-control"  id="User1" name ="Username" placeholder="User Name" >
                 </div>
                 <div class="form-group">
                     <label>Password</label>
@@ -265,9 +317,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <span id="8char" class="glyphicon glyphicon-remove" style="color:#FF0004;"></span> 4 Characters Long<br>
-
                             </div>
-
                         </div>
 
                     </div><!--/row-->
@@ -298,7 +348,7 @@
                 </div>
 
 
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
             </form>
             </div>
         </div>
@@ -328,35 +378,7 @@
             $("#8char").css("color","#FF0004");
         }
 
-        //if(ucase.test($("#password1").val())){
-        //	$("#ucase").removeClass("glyphicon-remove");
-        //	$("#ucase").addClass("glyphicon-ok");
-        //	$("#ucase").css("color","#00A41E");
-        //}else{
-        //	$("#ucase").removeClass("glyphicon-ok");
-        //	$("#ucase").addClass("glyphicon-remove");
-        //	$("#ucase").css("color","#FF0004");
-        //}
 
-        //if(lcase.test($("#password1").val())){
-        //	$("#lcase").removeClass("glyphicon-remove");
-        //	$("#lcase").addClass("glyphicon-ok");
-        //	$("#lcase").css("color","#00A41E");
-        //}else{
-        //	$("#lcase").removeClass("glyphicon-ok");
-        //	$("#lcase").addClass("glyphicon-remove");
-        //	$("#lcase").css("color","#FF0004");
-        //}
-
-        //if(num.test($("#password1").val())){
-        //	$("#num").removeClass("glyphicon-remove");
-        //	$("#num").addClass("glyphicon-ok");
-        //	$("#num").css("color","#00A41E");
-        //}else{
-        //	$("#num").removeClass("glyphicon-ok");
-        //	$("#num").addClass("glyphicon-remove");
-        //	$("#num").css("color","#FF0004");
-        //}
 
         if ($("#password1").val() == $("#password2").val()) {
             $("#pwmatch").removeClass("glyphicon-remove");
@@ -367,7 +389,313 @@
             $("#pwmatch").addClass("glyphicon-remove");
             $("#pwmatch").css("color", "#FF0004");
         }
-    });</script>
 
+    });</script>
+<script>
+    $("#EmployeeNumber1").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeNumber1").val().length >= 10){
+            $("#num").removeClass("glyphicon-remove");
+            $("#num").addClass("glyphicon-ok");
+            $("#num").css("color","#00A41E");
+        }else{
+            $("#num").removeClass("glyphicon-ok");
+            $("#num").addClass("glyphicon-remove");
+            $("#num").css("color","#FF0004");
+        }
+
+        if(!/^[0-9]+$/.test($("#EmployeeNumber1").val())){
+            alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
+
+        }
+
+    });
+
+
+    $("#EmployeeNumber").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeNumber").val().length >= 10){
+            $("#num1").removeClass("glyphicon-remove");
+            $("#num1").addClass("glyphicon-ok");
+            $("#num1").css("color","#00A41E");
+        }else{
+            $("#num1").removeClass("glyphicon-ok");
+            $("#num1").addClass("glyphicon-remove");
+            $("#num1").css("color","#FF0004");
+        }
+
+        if(!/^[0-9]+$/.test($("#EmployeeNumber").val())){
+            alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
+
+        }
+
+    });
+
+
+    function a() {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeNumber").val().length >= 10){
+            $("#num1").removeClass("glyphicon-remove");
+            $("#num1").addClass("glyphicon-ok");
+            $("#num1").css("color","#00A41E");
+        }else{
+            $("#num1").removeClass("glyphicon-ok");
+            $("#num1").addClass("glyphicon-remove");
+            $("#num1").css("color","#FF0004");
+        }
+
+        if(!/^[0-9]+$/.test($("#EmployeeNumber").val())){
+            alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
+
+        }}
+
+</script>
+<script>
+$("#EmployeeSalary1").keyup(function () {
+var ucase = new RegExp("[A-Z]+");
+var lcase = new RegExp("[a-z]+");
+var num = new RegExp("[0-9]+");
+
+if($("#EmployeeSalary1").val().length >= 2){
+    $("#sa").removeClass("glyphicon-remove");
+    $("#sa").addClass("glyphicon-ok");
+    $("#sa").css("color","#00A41E");
+}else{
+    $("#sa").removeClass("glyphicon-ok");
+    $("#sa").addClass("glyphicon-remove");
+    $("#sa").css("color","#FF0004");
+}
+
+
+if(!/^[0-9]+$/.test($("#EmployeeSalary1").val())){
+alert("Please only enter numeric characters only for your Salary! (Allowed input:0-9)")
+
+}
+
+});
+
+$("#EmployeeSalary").keyup(function () {
+    var ucase = new RegExp("[A-Z]+");
+    var lcase = new RegExp("[a-z]+");
+    var num = new RegExp("[0-9]+");
+
+    if($("#EmployeeSalary").val().length >= 2){
+        $("#sa1").removeClass("glyphicon-remove");
+        $("#sa1").addClass("glyphicon-ok");
+        $("#sa1").css("color","#00A41E");
+    }else{
+        $("#sa1").removeClass("glyphicon-ok");
+        $("#sa1").addClass("glyphicon-remove");
+        $("#sa1").css("color","#FF0004");
+    }
+
+});
+function s() {
+    var ucase = new RegExp("[A-Z]+");
+    var lcase = new RegExp("[a-z]+");
+    var num = new RegExp("[0-9]+");
+
+    if($("#EmployeeSalary").val().length >= 2){
+        $("#sa1").removeClass("glyphicon-remove");
+        $("#sa1").addClass("glyphicon-ok");
+        $("#sa1").css("color","#00A41E");
+    }else{
+        $("#sa1").removeClass("glyphicon-ok");
+        $("#sa1").addClass("glyphicon-remove");
+        $("#sa1").css("color","#FF0004");
+    }
+
+};
+</script>
+<script>
+    $("#EmployeeSocIdentity1").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeSocIdentity1").val().length >= 10){
+            $("#soc").removeClass("glyphicon-remove");
+            $("#soc").addClass("glyphicon-ok");
+            $("#soc").css("color","#00A41E");
+        }else{
+            $("#soc").removeClass("glyphicon-ok");
+            $("#soc").addClass("glyphicon-remove");
+            $("#soc").css("color","#FF0004");
+        }
+
+
+        if(!/^[0-9]+$/.test($("#EmployeeSocIdentity1").val())){
+            alert("Please only enter numeric characters only for your SocIdentity! (Allowed input:0-9)")
+
+        }
+
+    });
+    $("#EmployeeSocIdentity").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeSocIdentity").val().length >= 10){
+            $("#soc1").removeClass("glyphicon-remove");
+            $("#soc1").addClass("glyphicon-ok");
+            $("#soc1").css("color","#00A41E");
+        }else{
+            $("#soc1").removeClass("glyphicon-ok");
+            $("#soc1").addClass("glyphicon-remove");
+            $("#soc1").css("color","#FF0004");
+        }
+
+
+        if(!/^[0-9]+$/.test($("#EmployeeSocIdentity").val())){
+            alert("Please only enter numeric characters only for your SocIdentity! (Allowed input:0-9)")
+
+        }
+
+    });
+    function soc() {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeSocIdentity").val().length >= 10){
+            $("#soc1").removeClass("glyphicon-remove");
+            $("#soc1").addClass("glyphicon-ok");
+            $("#soc1").css("color","#00A41E");
+        }else{
+            $("#soc1").removeClass("glyphicon-ok");
+            $("#soc1").addClass("glyphicon-remove");
+            $("#soc1").css("color","#FF0004");
+        }
+
+
+        if(!/^[0-9]+$/.test($("#EmployeeSocIdentity").val())){
+            alert("Please only enter numeric characters only for your SocIdentity! (Allowed input:0-9)")
+
+        }
+
+    };
+    $("#EmployeeName1").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeName1").val().length > 0){
+            $("#name").removeClass("glyphicon-remove");
+            $("#name").addClass("glyphicon-ok");
+            $("#name").css("color","#00A41E");
+        }else{
+            $("#name").removeClass("glyphicon-ok");
+            $("#name").addClass("glyphicon-remove");
+            $("#name").css("color","#FF0004");
+        }
+
+
+
+    });
+    $("#EmployeeName").keyup(function () {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeName").val().length > 0){
+            $("#name1").removeClass("glyphicon-remove");
+            $("#name1").addClass("glyphicon-ok");
+            $("#name1").css("color","#00A41E");
+        }else{
+            $("#name1").removeClass("glyphicon-ok");
+            $("#name1").addClass("glyphicon-remove");
+            $("#name1").css("color","#FF0004");
+        }
+
+
+
+    });
+    function n() {
+        var ucase = new RegExp("[A-Z]+");
+        var lcase = new RegExp("[a-z]+");
+        var num = new RegExp("[0-9]+");
+
+        if($("#EmployeeName").val().length > 0){
+            $("#name1").removeClass("glyphicon-remove");
+            $("#name1").addClass("glyphicon-ok");
+            $("#name1").css("color","#00A41E");
+        }else{
+            $("#name1").removeClass("glyphicon-ok");
+            $("#name1").addClass("glyphicon-remove");
+            $("#name1").css("color","#FF0004");
+        }
+
+
+
+    };
+
+
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            if($("#EmployeeNumber1").val().length < 10){
+               return false;alert("Please enter  for your Phone Number!")}
+
+            if ($("#password1").val() != $("#password2").val()) {
+                    return false;
+            }
+            if(!/^[0-9]+$/.test($("#EmployeeNumber1").val())){
+                alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
+                return false;
+            }
+            if($("#EmployeeSocIdentity1").val().length < 2) {
+                return false;
+            }
+            if(!/^[0-9]+$/.test($("#EmployeeSocIdentity1").val())){
+                alert("Please only enter numeric characters only for your SocIdentity! (Allowed input:0-9)")
+                return false;
+            }
+                if($("#EmployeeName1").val().length = 0){
+                    return false;}
+                if($("#EmployeeSalary1").val().length < 2){
+                    return false;
+                }
+
+                return true;
+        });
+    });
+    $(function () {
+        $("#btnSubmitEdit").click(function () {
+            if($("#EmployeeNumber").val().length < 10){
+                return false;alert("Please enter  for your Phone Number!")}
+
+
+            if(!/^[0-9]+$/.test($("#EmployeeNumber").val())){
+                alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
+                return false;
+            }
+            if($("#EmployeeSocIdentity").val().length < 2) {
+                return false;
+            }
+            if(!/^[0-9]+$/.test($("#EmployeeSocIdentity").val())){
+                alert("Please only enter numeric characters only for your SocIdentity! (Allowed input:0-9)")
+                return false;
+            }
+            if($("#EmployeeName").val().length = 0){
+                return false;}
+            if($("#EmployeeSalary").val().length < 2){
+                return false;
+            }
+
+            return true;
+        });
+    });
+</script>
 </body>
 </html>

@@ -22,6 +22,7 @@
             <li ><a href="/ListDeveloper">Developer</a></li>
             <li><a href="/ListGeneration">Generation</a></li>
             <li class="active"><a href="/ListProduct">Product</a></li>
+            <li><a href="/ListColor">Color</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/Login"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
@@ -165,7 +166,8 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitEdit">Save</button>
+                        <a type="button" class="btn btn-default" href="/ListProduct" >Cancel</a>
                     </form>
                 </div>
             </div>
@@ -231,7 +233,8 @@
                             <%--<input type="text" class="form-control" value="${prod.genid}" id="GenId1" name ="GenId" >--%>
                         <%--</div>--%>
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
+                        <a type="button" class="btn btn-default" href="/ListProduct" >Cancel</a>
                     </form>
                 </div>
             </div>
@@ -239,6 +242,78 @@
     </c:choose>
 
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            if($("#ProdID1").val().length ==0){
+                alert("Please enter  for Product ID!")
+                return false;}
 
+            if($("#ProdName1").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdCpu1").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdRam1").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdStorage1").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdScreen1").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdBattery1").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+
+
+            return true;
+        });
+    });
+    $(function () {
+        $("#btnSubmitEdit").click(function () {
+
+            if($("#ProdID").val().length ==0){
+                alert("Please enter  for Product ID!")
+                return false;}
+
+            if($("#ProdName").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdCpu").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdRam").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdStorage").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdScreen").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+            if($("#ProdBattery").val().length ==0) {
+                alert("Please enter  for Product Name!")
+                return false;
+            }
+
+
+            return true;
+        });
+    });
+</script>
 </body>
 </html>

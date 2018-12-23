@@ -4,6 +4,7 @@ package com.nnq.quanlydienthoai.Controller;
 import com.nnq.quanlydienthoai.Model.Generation;
 import com.nnq.quanlydienthoai.Services.DeveloperService;
 import com.nnq.quanlydienthoai.Services.GenerationService;
+
 import com.nnq.quanlydienthoai.Services.LoginService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,13 @@ public class GenerationController {
     private DeveloperService developerService;
 
 
-    //Developer
+    @RequestMapping(value = "/SeachGeneration", method = RequestMethod.POST)
+    public String SearchGen(HttpServletRequest req)
+    {
+        req.setAttribute("genlist",generationService.SearchGen(req.getParameter("searchgen")));
+        req.setAttribute("mode","Gen_view");
+        return "Generation";
+    }
     @GetMapping("/ListGeneration")
     public String listGen(HttpServletRequest req)
     {

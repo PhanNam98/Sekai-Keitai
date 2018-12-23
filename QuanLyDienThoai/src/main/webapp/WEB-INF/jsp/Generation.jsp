@@ -39,6 +39,7 @@
             <li ><a href="/ListDeveloper">Developer</a></li>
             <li class="active"><a href="/ListGeneration">Generation</a></li>
             <li><a href="/ListProduct">Product</a></li>
+            <li><a href="/ListColor">Color</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/Login"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
@@ -50,7 +51,17 @@
 <div class="container" >
     <c:choose>
         <c:when test="${mode == 'Gen_view'}">
-            <h2>All Generation</h2>
+            <div class="row">
+                <div class="center-block col-md-6">
+                    <h2>All Generation</h2>
+                    <form  action="/SeachGeneration" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search" name="searchgen">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
             <button type="button" onclick="location.href='/CreateGeneration'" class="btn btn-primary" >
                 <a href="/CreateGeneration"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a>Create Generation
             </button>
@@ -131,7 +142,8 @@
                             <input type="text" class="form-control" value="${gen.devid}" id="DevID" name ="DevID" readonly="readonly">
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitEdit">Save</button>
+                        <a type="button" class="btn btn-default" href="/ListGeneration" >Cancel</a>
                     </form>
                 </div>
             </div>
@@ -167,7 +179,8 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
+                        <a type="button" class="btn btn-default" href="/ListGeneration" >Cancel</a>
                     </form>
                 </div>
             </div>
@@ -175,6 +188,35 @@
     </c:choose>
 
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            if($("#GenID1").val().length ==0){
+                alert("Please enter  for Generation ID!")
+                return false;}
 
+
+
+            if($("#GenName1").val().length ==0) {
+                alert("Please enter  for Generation Name!")
+                return false;
+            }
+
+
+            return true;
+        });
+    });
+    $(function () {
+        $("#btnSubmitEdit").click(function () {
+
+            if($("#GenName").val().length == 0) {
+                alert("Please enter  for Generation Name!")
+                return false;
+            }
+
+            return true;
+        });
+    });
+</script>
 </body>
 </html>

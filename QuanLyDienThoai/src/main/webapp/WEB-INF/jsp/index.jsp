@@ -22,6 +22,7 @@
             <li ><a href="/ListDeveloper">Developer</a></li>
             <li><a href="/ListGeneration">Generation</a></li>
             <li><a href="/ListProduct">Product</a></li>
+            <li><a href="/ListColor">Color</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/Login"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
@@ -225,6 +226,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" id="btnSubmitEdit">Save</button>
+                <a type="button" class="btn btn-default" href="/ListEmployee" >Cancel</a>
             </form>
             </div>
         </div>
@@ -349,6 +351,7 @@
 
 
                 <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
+                <a type="button" class="btn btn-default" href="/ListEmployee" >Cancel</a>
             </form>
             </div>
         </div>
@@ -645,7 +648,8 @@ function s() {
     $(function () {
         $("#btnSubmit").click(function () {
             if($("#EmployeeNumber1").val().length < 10){
-               return false;alert("Please enter  for your Phone Number!")}
+                alert("Please enter  for your Phone Number!")
+               return false;}
 
             if ($("#password1").val() != $("#password2").val()) {
                     return false;
@@ -654,16 +658,19 @@ function s() {
                 alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
                 return false;
             }
-            if($("#EmployeeSocIdentity1").val().length < 2) {
+            if($("#EmployeeSocIdentity1").val().length < 10) {
+                alert("Not longer than 10")
                 return false;
             }
             if(!/^[0-9]+$/.test($("#EmployeeSocIdentity1").val())){
                 alert("Please only enter numeric characters only for your SocIdentity! (Allowed input:0-9)")
                 return false;
             }
-                if($("#EmployeeName1").val().length = 0){
+                if($("#EmployeeName1").val()== 0){
+                    alert("Please enter  for Name!")
                     return false;}
                 if($("#EmployeeSalary1").val().length < 2){
+                    alert("Please enter  for Salary!")
                     return false;
                 }
 
@@ -673,23 +680,29 @@ function s() {
     $(function () {
         $("#btnSubmitEdit").click(function () {
             if($("#EmployeeNumber").val().length < 10){
-                return false;alert("Please enter  for your Phone Number!")}
+                alert("Please enter  for your Phone Number!")
+                return false;
+                ;
+            }
 
 
             if(!/^[0-9]+$/.test($("#EmployeeNumber").val())){
                 alert("Please only enter numeric characters only for your Phone Number! (Allowed input:0-9)")
                 return false;
             }
-            if($("#EmployeeSocIdentity").val().length < 2) {
+            if($("#EmployeeSocIdentity").val().length < 10) {
+                alert("Not longer than 10")
                 return false;
             }
             if(!/^[0-9]+$/.test($("#EmployeeSocIdentity").val())){
                 alert("Please only enter numeric characters only for your SocIdentity! (Allowed input:0-9)")
                 return false;
             }
-            if($("#EmployeeName").val().length = 0){
+            if($("#EmployeeName").val().length ==0 ||$("#EmployeeName").val()==null ){
+                alert("Please enter  for Name!")
                 return false;}
             if($("#EmployeeSalary").val().length < 2){
+                alert("Please enter  for Salary!")
                 return false;
             }
 

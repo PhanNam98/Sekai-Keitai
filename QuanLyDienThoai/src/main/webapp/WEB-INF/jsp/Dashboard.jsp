@@ -22,6 +22,7 @@
             <li ><a href="/ListDeveloper">Developer</a></li>
             <li><a href="/ListGeneration">Generation</a></li>
             <li><a href="/ListProduct">Product</a></li>
+            <li><a href="/ListColor">Color</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/Login"><span class="glyphicon glyphicon-user"></span> Logout</a></li>

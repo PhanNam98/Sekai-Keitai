@@ -22,6 +22,7 @@
             <li ><a href="/ListDeveloper">Developer</a></li>
             <li><a href="/ListGeneration">Generation</a></li>
             <li class="active"><a href="/ListProduct">Product</a></li>
+            <li><a href="/ListColor">Color</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/Login"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
@@ -142,7 +143,8 @@
 
 
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmitEdit">Save</button>
+
                     </form>
                 </div>
             </div>
@@ -186,7 +188,7 @@
                             <input type="text" class="form-control" value="${prod.quantity}" id="Quantity1" name ="Quantity" >
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
                     </form>
                 </div>
             </div>
@@ -194,6 +196,68 @@
     </c:choose>
 
 </div>
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            if($("#ModelID1").val().length ==0){
+                alert("Please enter  for Model ID!")
+                return false;}
 
+
+            if($("#Price1").val().length ==0) {
+                alert("Please enter  for Price!")
+                return false;
+            }
+
+            if(!/^[0-9]+$/.test($("#Price1").val())){
+                alert("Please only enter numeric characters only for Price! (Allowed input:0-9)")
+
+            }
+            if($("#Quantity1").val().length ==0) {
+                alert("Please enter  for Quantity!")
+                return false;
+            }
+
+            if(!/^[0-9]+$/.test($("#Quantity1").val())){
+                alert("Please only enter numeric characters only for Quantity! (Allowed input:0-9)")
+
+            }
+
+            return true;
+        });
+    });
+    $(function () {
+        $("#btnSubmitEdit").click(function () {
+
+            if($("#ModelID").val().length ==0){
+                alert("Please enter  for Model ID!")
+                return false;}
+
+
+            if($("#Price").val().length ==0) {
+                alert("Please enter  for Price!")
+                return false;
+            }
+
+            if(!/^[0-9]+$/.test($("#Price").val())){
+                alert("Please only enter numeric characters only for Price! (Allowed input:0-9)")
+
+            }
+            if($("#Quantity").val().length ==0) {
+                alert("Please enter  for Quantity!")
+                return false;
+            }
+
+            if(!/^[0-9]+$/.test($("#Quantity").val())){
+                alert("Please only enter numeric characters only for Quantity! (Allowed input:0-9)")
+
+            }
+
+
+
+            return true;
+        });
+    });
+</script>
 </body>
 </html>

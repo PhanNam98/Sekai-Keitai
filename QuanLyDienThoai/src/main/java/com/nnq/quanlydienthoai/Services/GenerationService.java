@@ -35,6 +35,11 @@ public class GenerationService {
         return   generationjpaRepository.findAll().stream().filter(p->p.getDevid().equals(id)).collect(Collectors.toList());
 
     }
+    public Collection<Generation> SearchGen(String id)
+    {
+        return   generationjpaRepository.findAll().stream().filter(p->p.getGenid().contains(id) && p.getGenname().contains(id)).collect(Collectors.toList());
+
+    }
     public Generation GetOneGen(String id)
     {
         return generationRepository.findById(id).get();
